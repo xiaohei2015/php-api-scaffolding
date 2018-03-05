@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace common\components\tools;
+namespace common\components\auth;
 
 use Yii;
 use yii\base\Action;
@@ -14,7 +14,6 @@ use yii\web\Request;
 use yii\web\Response;
 use yii\web\UnauthorizedHttpException;
 use yii\web\User;
-use yii\filters\auth\AuthInterface;
 
 /**
  * AuthMethod is a base class implementing the [[AuthInterface]] interface.
@@ -22,7 +21,7 @@ use yii\filters\auth\AuthInterface;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-abstract class AuthMethod extends ActionFilter implements AuthInterface
+abstract class AuthMethod extends ActionFilter implements \yii\filters\auth\AuthInterface
 {
     /**
      * @var User the user object representing the user authentication status. If not set, the `user` application component will be used.
@@ -90,10 +89,9 @@ abstract class AuthMethod extends ActionFilter implements AuthInterface
      */
     public function handleFailure($response)
     {
-        //throw new UnauthorizedHttpException('Your request was made with invalid credentials.');
         header('Content-type: application/json');
         header("Cache-Control: no-cache, must-revalidate");
-        $json =  json_encode(['code'=>'5112','msg'=>'Bad access token']);
+        $json =  json_encode(['code'=>'5112','msg'=>'身份异常请重新登录']);
         echo $json;
         Yii::$app->end();
     }

@@ -39,9 +39,9 @@ return [
             }
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\modelsBiz\UserBiz',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
@@ -75,6 +75,9 @@ return [
                 'GET api/v1/articles' => 'v1/article/index',
                 'POST api/v1/articles' => 'v1/article/create',
                 'GET api/v1/articles/<id:\d+>' => 'v1/article/view',
+
+                'POST api/v1/user/login' => 'v1/user/login',
+                'GET api/v1/user/isLogin' => 'v1/user/is-login',
             ],
         ],
     ],

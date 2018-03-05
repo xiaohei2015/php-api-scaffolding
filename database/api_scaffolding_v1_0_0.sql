@@ -4,6 +4,7 @@ USE `api_scaffolding_v1_0_0`;
 CREATE TABLE `tbl_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
   `account` varchar(128) NOT NULL DEFAULT '' COMMENT '账号',
+  `auth_key` varchar(32) NOT NULL DEFAULT '' COMMENT '记住我的认证',
   `password` varchar(128) NOT NULL DEFAULT '' COMMENT '密码',
   `name` varchar(64) NOT NULL DEFAULT '' COMMENT '姓名',
   `sex` tinyint(4) NOT NULL DEFAULT '0' COMMENT '性别(1:男,2:女)',

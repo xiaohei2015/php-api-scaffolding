@@ -2,8 +2,8 @@
 namespace api\modules\v1;
 
 use Yii;
-use common\components\tools\Auth;
-use common\components\tools\CompositeAuth;
+use common\components\auth\QueryParamAuth;
+use common\components\auth\CompositeAuth;
 
 class Module extends \yii\base\Module
 {
@@ -21,12 +21,13 @@ class Module extends \yii\base\Module
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
             'authMethods' => [
-                Auth::className(),
+                QueryParamAuth::className(),
             ],
             'optional' => [
                 'common/*',
                 'index/*',
                 'article/*',
+                'user/login',
             ],
         ];
         return $behaviors;

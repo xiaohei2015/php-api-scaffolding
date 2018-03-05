@@ -1,32 +1,32 @@
 <?php
+
 namespace common\models;
 
 use Yii;
-use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
 
 /**
- * User model
+ * This is the model class for table "tbl_user".
  *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
+ * @property int $id 用户编号
+ * @property string $account 账号
+ * @property string $auth_key 记住我的认证
+ * @property string $password 密码
+ * @property string $name 姓名
+ * @property int $sex 性别(1:男,2:女)
+ * @property string $avatar 头像
+ * @property string $phone 手机号码
+ * @property int $status 状态(0:未认证,1:审核通过,2:审核失败)
+ * @property int $create_time 添加时间
+ * @property int $update_time 更新时间
+ * @property int $last_login 最后登录时间
+ * @property int $is_deleted 是否删除(0:否,1:是)
+ * @property string $token 令牌
+ * @property int $token_expired_time 令牌过期时间
+ * @property int $allowance 速率限制数量
+ * @property int $allowance_updated_at 速率限制更新时间
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends \yii\db\ActiveRecord
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
-
-
     /**
      * @inheritdoc
      */
@@ -38,152 +38,40 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['create_time', 'update_time', 'last_login', 'token_expired_time', 'allowance', 'allowance_updated_at','sex', 'status', 'is_deleted'], 'integer'],
+            [['account', 'password', 'avatar'], 'string', 'max' => 128],
+            [['auth_key', 'token'], 'string', 'max' => 32],
+            [['name'], 'string', 'max' => 64],
+            [['phone'], 'string', 'max' => 16],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    public function attributeLabels()
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     * @return static|null
-     */
-    public static function findByPasswordResetToken($token)
-    {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
-        }
-
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
-    }
-
-    /**
-     * Finds out if password reset token is valid
-     *
-     * @param string $token password reset token
-     * @return bool
-     */
-    public static function isPasswordResetTokenValid($token)
-    {
-        if (empty($token)) {
-            return false;
-        }
-
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        return $timestamp + $expire >= time();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->getPrimaryKey();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
-        return $this->auth_key;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->getAuthKey() === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
-    }
-
-    /**
-     * Generates password hash from password and sets it to the model
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
-    }
-
-    /**
-     * Generates "remember me" authentication key
-     */
-    public function generateAuthKey()
-    {
-        $this->auth_key = Yii::$app->security->generateRandomString();
-    }
-
-    /**
-     * Generates new password reset token
-     */
-    public function generatePasswordResetToken()
-    {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
-    }
-
-    /**
-     * Removes password reset token
-     */
-    public function removePasswordResetToken()
-    {
-        $this->password_reset_token = null;
+        return [
+            'id' => '用户编号',
+            'account' => '账号',
+            'auth_key' => '记住我的认证',
+            'password' => '密码',
+            'name' => '姓名',
+            'sex' => '性别(1:男,2:女)',
+            'avatar' => '头像',
+            'phone' => '手机号码',
+            'status' => '状态(0:未认证,1:审核通过,2:审核失败)',
+            'create_time' => '添加时间',
+            'update_time' => '更新时间',
+            'last_login' => '最后登录时间',
+            'is_deleted' => '是否删除(0:否,1:是)',
+            'token' => '令牌',
+            'token_expired_time' => '令牌过期时间',
+            'allowance' => '速率限制数量',
+            'allowance_updated_at' => '速率限制更新时间',
+        ];
     }
 }

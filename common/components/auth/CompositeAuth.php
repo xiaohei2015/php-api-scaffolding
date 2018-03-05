@@ -5,11 +5,10 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace common\components\tools;
+namespace common\components\auth;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\filters\auth\AuthInterface;
 
 /**
  * CompositeAuth is an action filter that supports multiple authentication methods at the same time.
@@ -64,9 +63,9 @@ class CompositeAuth extends AuthMethod
     public function authenticate($user, $request, $response)
     {
         foreach ($this->authMethods as $i => $auth) {
-            if (!$auth instanceof AuthInterface) {
+            if (!$auth instanceof \yii\filters\auth\AuthInterface) {
                 $this->authMethods[$i] = $auth = Yii::createObject($auth);
-                if (!$auth instanceof AuthInterface) {
+                if (!$auth instanceof \yii\filters\auth\AuthInterface) {
                     throw new InvalidConfigException(get_class($auth) . ' must implement yii\filters\auth\AuthInterface');
                 }
             }

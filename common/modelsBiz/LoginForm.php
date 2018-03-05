@@ -1,8 +1,9 @@
 <?php
-namespace common\models;
+namespace common\modelsBiz;
 
 use Yii;
 use yii\base\Model;
+use common\modelsBiz\UserBiz;
 
 /**
  * Login form
@@ -56,6 +57,10 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
+            $user = $this->getUser();
+            $user->setAccessToken();
+            $user->setLastLoginTime();
+            $user->save();
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         
@@ -70,7 +75,7 @@ class LoginForm extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = UserBiz::findByUsername($this->username);
         }
 
         return $this->_user;
