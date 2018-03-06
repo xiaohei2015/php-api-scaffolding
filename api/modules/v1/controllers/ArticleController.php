@@ -3,6 +3,8 @@ namespace api\modules\v1\controllers;
 
 use Yii;
 use common\components\rest\ActiveController;
+use common\components\response\ReturnMsg;
+use common\components\tools\ParamValidator;
 
 class ArticleController extends ActiveController
 {
@@ -39,38 +41,31 @@ class ArticleController extends ActiveController
         );
     }
 
-    public function actionApply()
+    public function actionAdd()
     {
-        $params = Yii::$app->request->getBodyParams();
-        $params['is_recommend'] = @$params['is_recommend']==1?1:0;
-        //validation
-        if(!isset($params['jd_ids']) || !is_array($params['jd_ids'])){
-            GbException::throwException('参数jd_ids有误');
-        }
-        if(!isset($params['profile_id']) || !$params['profile_id']){
-            GbException::throwException('参数profile_id有误');
-        }
-        if(!\xcx\modelsBiz\GbJdProfileBiz::isMyProfile($params['profile_id'])){
-            GbException::throwException('参数profile_id有误');
+        //param validator
+        $validator = new ParamValidator();
+        $paramConfig = [];
+        $paramConfig[] = $validator::stringParam('title',array('title'=>'文章标题'));
+        $paramConfig[] = $validator::stringParam('content',array('title'=>'文章内容'));
+        if(!$params = $validator->validateParams($paramConfig)){
+            return $validator->getError();
         }
 
-        //transaction
-        $connection = Yii::$app->db;
-        $transaction = $connection->beginTransaction();
-        try {
-            $model = new \xcx\modelsBiz\GbJdProfileBiz();
-            if(!$model->batchApplyJds($params)){
-                throw new \Exception('保存失败');
-            }
-            $transaction->commit();
-        } catch (\Exception $e) {
-            $transaction->rollBack();
-            if($model->hasErrors()){
-                return $model;
-            }else
-                \common\components\exception\GbException::throwException($e->getMessage());
-        }
+        \common\modelsBiz\ArticleBiz::createArticle($params);
+        return ReturnMsg::success('保存成功');
+    }
 
-        return;
+    public function actionParamsValidate()
+    {
+        //param validator
+        $validator = new ParamValidator();
+        $paramConfig = [];
+        $paramConfig[] = $validator::numberParam('phone',array('title'=>'手机号码'));
+        if(!$params = $validator->validateParams($paramConfig)){
+            return $validator->getError();
+        }
+        return ReturnMsg::success('验证成功');
+        //return ReturnMsg::fail('验证失败！','sex');
     }
 }

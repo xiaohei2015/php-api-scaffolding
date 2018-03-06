@@ -56,8 +56,11 @@ return [
                 ],
             ],
         ],
+        'error' => [
+            'class' => '\common\components\exception\Error',
+        ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'class' => 'common\components\exception\ErrorHandler',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -72,12 +75,14 @@ return [
                     ]
                 ],
                 //路由
-                'GET api/v1/articles' => 'v1/article/index',
-                'POST api/v1/articles' => 'v1/article/create',
-                'GET api/v1/articles/<id:\d+>' => 'v1/article/view',
+                'GET api/v1/article' => 'v1/article/index',
+                'POST api/v1/article' => 'v1/article/create',
+                'GET api/v1/article/<id:\d+>' => 'v1/article/view',
+                'POST api/v1/article/params-validate' => 'v1/article/params-validate',
+                'POST api/v1/article/add' => 'v1/article/add',
 
                 'POST api/v1/user/login' => 'v1/user/login',
-                'GET api/v1/user/isLogin' => 'v1/user/is-login',
+                'GET api/v1/user/is-login' => 'v1/user/is-login',
             ],
         ],
     ],

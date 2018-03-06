@@ -35,7 +35,7 @@ class Article extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['create_time', 'update_time'], 'integer'],
             [['title'], 'string', 'max' => 64],
-            [['status', 'is_deleted'], 'string', 'max' => 4],
+            [['status', 'is_deleted'], 'integer', 'max' => 4],
         ];
     }
 

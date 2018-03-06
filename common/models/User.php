@@ -41,10 +41,11 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['create_time', 'update_time', 'last_login', 'token_expired_time', 'allowance', 'allowance_updated_at','sex', 'status', 'is_deleted'], 'integer'],
+            [['create_time', 'update_time', 'last_login', 'token_expired_time', 'allowance', 'allowance_updated_at'], 'integer'],
             [['account', 'password', 'avatar'], 'string', 'max' => 128],
             [['auth_key', 'token'], 'string', 'max' => 32],
             [['name'], 'string', 'max' => 64],
+            [['sex', 'status', 'is_deleted'], 'string', 'max' => 4],
             [['phone'], 'string', 'max' => 16],
         ];
     }

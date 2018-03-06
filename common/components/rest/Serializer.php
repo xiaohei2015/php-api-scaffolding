@@ -144,15 +144,17 @@ class Serializer extends Component
      */
     public function serialize($data)
     {
+        $param = Yii::$app->params['response.code']['success'];
         if ($data instanceof Model && $data->hasErrors()) {
-            return ['code'=>1,'msg'=>'FALSE','data'=>$this->serializeModelErrors($data)];
+            $param = Yii::$app->params['response.code']['param_invalid'];
+            return ['code'=>$param['id'],'msg'=>$param['label'],'data'=>$this->serializeModelErrors($data)];
         } elseif ($data instanceof Arrayable) {
-            return ['code'=>0,'msg'=>'OK','data'=>$this->serializeModel($data)];
+            return ['code'=>$param['id'],'msg'=>$param['label'],'data'=>$this->serializeModel($data)];
         } elseif ($data instanceof DataProviderInterface) {
-            return ['code'=>0,'msg'=>'OK','data'=>$this->serializeDataProvider($data)];
+            return ['code'=>$param['id'],'msg'=>$param['label'],'data'=>$this->serializeDataProvider($data)];
         }
 
-        return $data?['code'=>0,'msg'=>'OK','data'=>$data]:['code'=>0,'msg'=>'OK'];
+        return $data?['code'=>$param['id'],'msg'=>$param['label'],'data'=>$data]:['code'=>$param['id'],'msg'=>$param['label']];
     }
 
     /**

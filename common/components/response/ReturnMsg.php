@@ -13,7 +13,13 @@ class ReturnMsg extends Model
     public static function fail($msg, $field = '')
     {
         $model = new self();
-        $model->addError($field, $msg);
+        if(is_array($msg) || is_object($msg)){
+            foreach($msg as $k=>$v){
+                $model->addError($k, $v);
+            }
+        }else {
+            $model->addError($field, $msg);
+        }
         return $model;
     }
 

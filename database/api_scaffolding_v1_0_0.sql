@@ -25,7 +25,7 @@ CREATE TABLE `tbl_user` (
 
 CREATE TABLE `tbl_article` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '文章编号',
-	`title` varchar(64) DEFAULT '' COMMENT '文章标题',
+	`title` varchar(64) NOT NULL DEFAULT '' COMMENT '文章标题',
 	`content` text NOT NULL DEFAULT '' COMMENT '文章内容',
 	`status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0：未发布 1：已发布',
 	`create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -36,7 +36,7 @@ CREATE TABLE `tbl_article` (
 
 CREATE TABLE `tbl_article_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `article_id` bigint(20) DEFAULT '0' COMMENT '文章编号',
+  `article_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '文章编号',
   `title` varchar(64) NOT NULL DEFAULT '' COMMENT '日志标题',
   `content` varchar(500) NOT NULL DEFAULT '' COMMENT '日志内容',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',

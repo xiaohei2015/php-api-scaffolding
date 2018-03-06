@@ -17,10 +17,7 @@ class ArticleLogBiz extends ArticleLog
      */
     public function rules()
     {
-        return [
-            [['id', 'article_id', 'create_time'], 'integer'],
-            [['title', 'content'], 'safe'],
-        ];
+        return parent::rules();
     }
 
     /**

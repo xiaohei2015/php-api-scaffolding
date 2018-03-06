@@ -126,6 +126,16 @@ class ErrorHandler extends \yii\base\ErrorHandler
         $response->send();
     }
 
+    private function getCode()
+    {
+        return Yii::$app->error->getCode();
+    }
+
+    private function getErrors()
+    {
+        return Yii::$app->error->getAll();
+    }
+
     /**
      * Converts an exception into an array.
      * @param \Exception|\Error $exception the exception being converted
@@ -139,8 +149,9 @@ class ErrorHandler extends \yii\base\ErrorHandler
 
         $array = [
             //'name' => ($exception instanceof Exception || $exception instanceof ErrorException) ? $exception->getName() : 'Exception',
-            'code' => $exception->getCode(),
+            'code' => $this->getCode(),
             'msg' => $exception->getMessage(),
+            'data' => $this->getErrors(),
         ];
         /*if ($exception instanceof HttpException) {
             $array['status'] = $exception->statusCode;
