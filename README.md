@@ -43,9 +43,13 @@ return [
     ],
 ];
 ```
-##### 4. Fire the database sql file under 'database/api_scaffolding_v1_0_0.sql'
+##### 4. Run command init under project root directory, and select dev environment for the prompts
+```
+init
+```
+##### 5. Fire the database sql file under 'database/api_scaffolding_v1_0_0.sql'
 
-##### 5. Configure the Nginx/Apache, and restart Nginx/Apache. Below is the nginx configuration example
+##### 6. Configure the Nginx/Apache, and restart Nginx/Apache. Below is the nginx configuration example
 ```
 server{
 	listen 1081;
@@ -138,7 +142,7 @@ server{
 }
 
 ```
-##### 6. Check whether you can visit URL 'http://api.scaffolding.com/api/v1/user/login'
+##### 7. Check whether you can visit URL 'http://api.scaffolding.com/api/v1/user/login'
 If system response like '{"code":1,"msg":"page not found。","data":[],"type":"yii\\web\\NotFoundHttpException"}',
 it means, your environment has been ready.
 
