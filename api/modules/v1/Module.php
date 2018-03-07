@@ -24,10 +24,9 @@ class Module extends \yii\base\Module
                 QueryParamAuth::className(),
             ],
             'optional' => [
-                'common/*',
-                'index/*',
-                'article/*',
                 'user/login',
+                'article/*',
+                'article2/*',
             ],
         ];
         return $behaviors;

@@ -22,7 +22,8 @@ class ExceptionHandler extends \yii\base\UserException
      */
     public static function throwNormalException($data)
     {
-        throw new \Exception(json_encode($data));
+        Yii::$app->error->addMulti($data);
+        throw new \Exception('Error Encountered');
     }
 
     /**

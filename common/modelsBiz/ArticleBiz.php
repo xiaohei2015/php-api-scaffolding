@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Article;
-use \common\components\exception\ExceptionHandler;
+use common\components\exception\ExceptionHandler;
 
 /**
  * ArticleBiz represents the model behind the search form of `common\models\Article`.

@@ -70,7 +70,7 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
-                        'v1/site',
+                        'v1/article2',
                         'v1/center',
                     ]
                 ],

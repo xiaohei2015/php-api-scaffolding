@@ -5,6 +5,7 @@ use Yii;
 use common\components\rest\ActiveController;
 use common\components\response\ReturnMsg;
 use common\components\tools\ParamValidator;
+use common\modelsBiz\ArticleBiz;
 
 class ArticleController extends ActiveController
 {
@@ -52,7 +53,7 @@ class ArticleController extends ActiveController
             return $validator->getError();
         }
 
-        \common\modelsBiz\ArticleBiz::createArticle($params);
+        ArticleBiz::createArticle($params);
         return ReturnMsg::success('保存成功');
     }
 
