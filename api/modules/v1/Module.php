@@ -25,7 +25,6 @@ class Module extends \yii\base\Module
             ],
             'optional' => [
                 'user/login',
-                'article/*',
                 'article2/*',
             ],
         ];

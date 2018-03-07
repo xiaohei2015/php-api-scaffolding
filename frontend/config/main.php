@@ -11,6 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'rbac' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu',//yii2-admin的导航菜单
+        ]
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -42,6 +48,9 @@ return [
             'rules' => [
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ]
     ],
     'params' => $params,
 ];

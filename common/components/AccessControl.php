@@ -3,6 +3,7 @@
 namespace common\components;
 
 use Yii;
+use common\components\exception\ExceptionHandler;
 
 /**
  * Access Control Filter (ACF) Redefine.
@@ -17,11 +18,12 @@ class AccessControl extends \mdm\admin\components\AccessControl
     protected function denyAccess($user)
     {
         if ($user->getIsGuest()) {
-            header('Content-type: application/json');
+            /*header('Content-type: application/json');
             header("Cache-Control: no-cache, must-revalidate");
             $json =  json_encode(['code'=>'5112','msg'=>'身份异常请重新登录']);
             echo $json;
-            Yii::$app->end();
+            Yii::$app->end();*/
+            ExceptionHandler::throwException('身份异常请重新登录');
         } else {
             header('Content-type: application/json');
             header("Cache-Control: no-cache, must-revalidate");

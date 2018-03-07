@@ -14,18 +14,16 @@ class Error extends Component
     private $error = [];
     private $code = 1;
 
-    public function add($attribute, $label)
-    {
-        $this->error[$attribute] = $label;
-    }
-
-    public function addMulti($err)
+    public function add($err, $code = 1)
     {
         if(is_array($err) || is_object($err)){
             foreach ($err as $k=>$v){
                 $this->error[$k] = $v;
             }
+        }else{
+            $this->error = $err;
         }
+        $this->setCode($code);
     }
 
     public function getAll()
@@ -36,5 +34,10 @@ class Error extends Component
     public function getCode()
     {
         return $this->code;
+    }
+
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 }

@@ -21,7 +21,7 @@ CREATE TABLE `tbl_user` (
   `allowance_updated_at` int(10) NOT NULL DEFAULT '0' COMMENT '速率限制更新时间',
   PRIMARY KEY (`id`),
   KEY `idx_phone` (`phone`) USING BTREE COMMENT '手机号码索引'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 CREATE TABLE `tbl_article` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '文章编号',
@@ -42,3 +42,51 @@ CREATE TABLE `tbl_article_log` (
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章日志表';
+
+CREATE TABLE `tbl_admin_user` (
+  `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户编号',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='后台用户扩展表';
+
+/*RBAC*/
+CREATE TABLE `auth_rule`
+(
+   `name`                 varchar(64) NOT NULL,
+   `data`                 blob,
+   `created_at`           integer,
+   `updated_at`           integer,
+    PRIMARY KEY (`name`)
+) ENGINE InnoDB;
+
+CREATE TABLE `auth_item`
+(
+   `name`                 varchar(64) NOT NULL,
+   `type`                 smallint NOT NULL,
+   `description`          text,
+   `rule_name`            varchar(64),
+   `data`                 blob,
+   `created_at`           integer,
+   `updated_at`           integer,
+   PRIMARY KEY (`name`),
+   FOREIGN KEY (`rule_name`) references `auth_rule` (`name`) on delete set null on update cascade,
+   key `type` (`type`)
+) ENGINE InnoDB;
+
+CREATE TABLE `auth_item_child`
+(
+   `parent`               varchar(64) NOT NULL,
+   `child`                varchar(64) NOT NULL,
+   PRIMARY KEY (`parent`, `child`),
+   FOREIGN KEY (`parent`) references `auth_item` (`name`) on delete cascade on update cascade,
+   FOREIGN KEY (`child`) references `auth_item` (`name`) on delete cascade on update cascade
+) ENGINE InnoDB;
+
+CREATE TABLE `auth_assignment`
+(
+   `item_name`            varchar(64) NOT NULL,
+   `user_id`              varchar(64) NOT NULL,
+   `created_at`           integer,
+   PRIMARY KEY (`item_name`, `user_id`),
+   FOREIGN KEY (`item_name`) references `auth_item` (`name`) on delete cascade on update cascade,
+   key `auth_assignment_user_id_idx` (`user_id`)
+) ENGINE InnoDB;

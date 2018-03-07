@@ -22,7 +22,7 @@ class ExceptionHandler extends \yii\base\UserException
      */
     public static function throwNormalException($data)
     {
-        Yii::$app->error->addMulti($data);
+        Yii::$app->error->add($data);
         throw new \Exception('Error Encountered');
     }
 
@@ -31,7 +31,7 @@ class ExceptionHandler extends \yii\base\UserException
      */
     public static function throwModelException($model)
     {
-        Yii::$app->error->addMulti($model->getFirstErrors());
+        Yii::$app->error->add($model->getFirstErrors());
         throw new \Exception('Error Encountered');
     }
 
