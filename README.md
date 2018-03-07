@@ -154,7 +154,7 @@ a) Create models class by gii, e.g. common/models/Article.php<br/>
 b) Create modelsBiz class by gii, e.g. common/modelsBiz/ArticleBiz.php<br/>
 c) Create Controller class, e.g. api/modules/v1/controllers/Article2Controller.php, <br/>
 d) Send request with URL 'http://api.scaffolding.com/v1/article2s', you will get a list api.<br/> 
-e) You can also try below URL
+e) You can also try below URL<br/>
  POST 'http://api.scaffolding.com/v1/article2s' with title=title1 and content=content1<br/>
  GET 'http://api.scaffolding.com/v1/article2s/1'<br/>
  PUT 'http://api.scaffolding.com/v1/article2s/1' with title=title11 and content=content11<br/>
