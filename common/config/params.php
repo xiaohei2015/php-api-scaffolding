@@ -3,6 +3,11 @@ return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
+    /*alidayu sms service*/
+    'sms.config'=>[
+        'app_key'    => '12345678',
+        'app_secret' => 'abcdefghijklmnopqrstuvwxyz123456',
+    ],
     'response.code' => [
         /*成功*/
         'success'                   => ['id'=>0,        'name'=>'SUCCESS',              'label'=>'请求成功'],

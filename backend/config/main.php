@@ -47,6 +47,7 @@ return [
         'session' => [
             'class' => 'yii\redis\Session',
             'name' => 'advanced-backend',
+            'timeout' => 10,
             'keyPrefix' => 'session.',
             'redis' => [
                 'hostname' => 'localhost',
