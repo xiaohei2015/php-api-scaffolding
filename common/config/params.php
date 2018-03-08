@@ -23,4 +23,6 @@ return [
         'user_not_login'            => ['id'=>2000,     'name'=>'USER_NOT_LOGIN',       'label'=>'用户未登录'],
         'user_frozen'               => ['id'=>2001,     'name'=>'USER_FROZEN',          'label'=>'账户被冻结'],
     ],
+    'cache.prefix' => 'cache.',
+    'queue.prefix' => 'queue.',
 ];
