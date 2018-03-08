@@ -222,8 +222,8 @@ a) QQ(306539332)<br/>
 b) Email(306539332@qq.com)<br/>
 ##### 2. You can also sponsor me to make this project better. Thanks!
 <p align="center">
-    <img style="width:200px;" src="https://github.com/xiaohei2015/php-api-scaffolding/blob/master/alipay.png"/>
+    <img width="200px" src="https://github.com/xiaohei2015/php-api-scaffolding/blob/master/alipay.png"/>
 </p>
 <p align="center">
-    <img style="width:200px;" src="https://github.com/xiaohei2015/php-api-scaffolding/blob/master/wechat.jpg"/>
+    <img width="200px" src="https://github.com/xiaohei2015/php-api-scaffolding/blob/master/wechat.jpg"/>
 </p>
