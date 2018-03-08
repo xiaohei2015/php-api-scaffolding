@@ -15,6 +15,14 @@ return [
         'rbac' => [
             'class' => 'mdm\admin\Module',
             'layout' => 'left-menu',//yii2-admin的导航菜单
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'common\modelsBiz\UserBiz',
+                    'idField' => 'id',
+                    'usernameField' => 'account',
+                ]
+            ],
         ]
     ],
     'components' => [

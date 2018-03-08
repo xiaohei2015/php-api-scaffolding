@@ -27,8 +27,6 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
-    const STATUS_ACTIVE = 1;
-
     /**
      * @inheritdoc
      */
@@ -76,18 +74,5 @@ class User extends \yii\db\ActiveRecord
             'allowance' => '速率限制数量',
             'allowance_updated_at' => '速率限制更新时间',
         ];
-    }
-
-    public function getUsername()
-    {
-        return $this->account;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentity($id)
-    {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 }

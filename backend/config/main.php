@@ -96,7 +96,6 @@ return [
         'class' => 'common\components\AccessControl',
         'allowActions' => [
             'v1/user/login',//允许所有人访问admin节点及其子节点
-            'v1/user/logout',//允许所有人访问admin节点及其子节点
         ]
     ],
     'params' => $params,
