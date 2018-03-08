@@ -40,13 +40,20 @@ return [
         ],
         'user' => [
             'identityClass' => 'backend\models\AdminUser',
-            'enableAutoLogin' => false,
+            'enableAutoLogin' => true,
             'loginUrl' => null,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the backend
+            'class' => 'yii\redis\Session',
             'name' => 'advanced-backend',
+            'keyPrefix' => 'session.',
+            'redis' => [
+                'hostname' => 'localhost',
+                'port' => 6379,
+                'database' => 0,
+                'password' => 'pass',
+            ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

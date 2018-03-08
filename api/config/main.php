@@ -7,7 +7,7 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-frontend',
+    'id' => 'app-api',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
@@ -44,8 +44,9 @@ return [
             'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
+            // this is the name of the session cookie used for login on the api
+            'name' => 'advanced-api',
+            'timeout' => 0,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -83,6 +84,7 @@ return [
 
                 'POST api/v1/user/login' => 'v1/user/login',
                 'GET api/v1/user/is-login' => 'v1/user/is-login',
+                'POST api/v1/user/logout' => 'v1/user/logout',
             ],
         ],
     ],

@@ -10,6 +10,7 @@ The object for this project is to build api easily and funny.
 ##### 1. PHP Version > PHP5.5
 ##### 2. Nginx or Apache
 ##### 3. MySQL Version > MySQL 5.6
+##### 4. Composer
 
 ## Steps To Use
 ##### 1. Clone the lastest source code
@@ -111,11 +112,44 @@ server{
 	}
 }
 
-upstream scaffolding_gii{
+server{
+	listen 1083;
+	root /home/vm05/dongming/src/My/php-api-scaffolding/backend/web;
+	server_name 127.0.0.1;
+	access_log /data/logs/nginx/api-api.scaffolding.com-access.log;
+	error_log  /data/logs/nginx/api-api.scaffolding.com-error.log;
+
+
+	location / {
+		root   /home/vm05/dongming/src/My/php-api-scaffolding/backend/web;
+		index  index.html index.htm index.php;
+		if (!-e $request_filename){
+				rewrite ^/(.*) /index.php last;
+		}
+	}
+	
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+
+		# With php5-cgi alone:
+		fastcgi_pass 127.0.0.1:9000;
+		# With php5-fpm:
+		#fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
+}
+
+upstream scaffolding_config{
 	server 127.0.0.1:1081;
 }
 upstream scaffolding_api{
 	server 127.0.0.1:1082;
+}
+upstream scaffolding_backend{
+	server 127.0.0.1:1083;
 }
 
 server{
@@ -127,19 +161,28 @@ server{
 		rewrite ^/(.*)$ http://api.scaffolding.com/$1 permanent;
 	}
 
-	location  ~ ^/gii\//* {
-                proxy_pass      http://scaffolding_gii;
-                proxy_set_header  X-Real-IP  $remote_addr;
-                proxy_set_header   Host             $host;
-                proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-        }
-	location  ~ ^/* {
+	location  ~ ^/api\//* {
                 proxy_pass      http://scaffolding_api;
                 proxy_set_header  X-Real-IP  $remote_addr;
                 proxy_set_header   Host             $host;
                 proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
         }
+
+	location  ~ ^/admin\//* {
+                proxy_pass      http://scaffolding_backend;
+                proxy_set_header  X-Real-IP  $remote_addr;
+                proxy_set_header   Host             $host;
+                proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        }
+
+	location  ~ ^/* {
+                proxy_pass      http://scaffolding_config;
+                proxy_set_header  X-Real-IP  $remote_addr;
+                proxy_set_header   Host             $host;
+                proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        }
 }
+
 
 ```
 ##### 7. Check whether you can visit URL 'http://api.scaffolding.com/api/v1/user/login'
@@ -168,6 +211,19 @@ Refer to function createArticle under 'common/modelsBiz/ArticleBiz.php'.
 ##### 4. Params Validator
 Refer to function actionAdd under 'api/modules/v1/controllers/ArticleController.php'.
 
-## You can also sponsor me to make this project better. Thanks!
-![支付宝付款码](https://github.com/xiaohei2015/php-api-scaffolding/blob/master/alipay.png)
-![微信付款码](https://github.com/xiaohei2015/php-api-scaffolding/blob/master/wechat.jpg)
+##### 5. Token Authorization
+When you calling URL 'http://api.scaffolding.com/api/v1/user/login', system will response "token" field to client. 
+And the token will be as the access-token for the following request, otherwise system will reject the response.
+Please take the access-token in the request header.
+
+## Support and Sponsor:
+##### 1. Any question, you can contact author.
+a) QQ(306539332)<br/>
+b) Email(306539332@qq.com)<br/>
+##### 2. You can also sponsor me to make this project better. Thanks!
+<p align="center">
+    <img style="width:200px;" src="https://github.com/xiaohei2015/php-api-scaffolding/blob/master/alipay.png"/>
+</p>
+<p align="center">
+    <img style="width:200px;" src="https://github.com/xiaohei2015/php-api-scaffolding/blob/master/wechat.jpg"/>
+</p>

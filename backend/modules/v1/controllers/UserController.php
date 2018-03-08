@@ -25,6 +25,7 @@ class UserController extends ActiveController
         $model = new LoginForm();
         $model->username = Yii::$app->request->post('username');
         $model->password = Yii::$app->request->post('password');
+        $model->rememberMe = Yii::$app->request->post('remember_me');
         if ($model->login()) {
             return \backend\models\AdminUser::getUserInfo();
         } else {
