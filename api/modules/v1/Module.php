@@ -26,6 +26,7 @@ class Module extends \yii\base\Module
             'optional' => [
                 'user/login',
                 'article2/*',
+                'func/*',
             ],
         ];
         return $behaviors;

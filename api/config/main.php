@@ -92,6 +92,8 @@ return [
                 'POST api/v1/user/login' => 'v1/user/login',
                 'GET api/v1/user/is-login' => 'v1/user/is-login',
                 'POST api/v1/user/logout' => 'v1/user/logout',
+
+                'POST api/v1/func/send-email' => 'v1/func/send-email',
             ],
         ],
     ],
