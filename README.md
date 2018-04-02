@@ -216,6 +216,8 @@ When you calling URL 'http://api.scaffolding.com/api/v1/user/login', system will
 And the token will be as the access-token for the following request, otherwise system will reject the response.
 Please take the access-token in the request header.
 
+##### 6. Provide the common session & cookie authorization  
+
 ## Support and Sponsor:
 ##### 1. Any question, you can contact author.
 a) QQ(306539332)<br/>

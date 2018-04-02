@@ -76,24 +76,22 @@ return [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                /*[
+                [
                     'class' => 'yii\rest\UrlRule',
+                    'prefix' => 'api',
                     'controller' => [
-                        //'v1/jd',
-                        //'v1/label',
+                        'v1/article',
                     ],
                     'extraPatterns' => [
-                        'DELETE' => 'delete',
-                    ]
-                ],*/
-                //用户
-                'POST admin/v1/user/login' => 'v1/user/login',
-                'GET admin/v1/user/is-login' => 'v1/user/is-login',
-                'GET admin/v1/user/logout' => 'v1/user/logout',
-                //通用
-                'GET admin/v1/common/provinces' => 'v1/common/provinces',
-                //职位
-                'GET admin/v1/jds' => 'v1/jd/index',
+                        'POST {id}' => 'update',
+                        'DELETE {id}' => 'delete',
+                        'GET {id}' => 'view',
+                        'POST' => 'create',
+                        'GET' => 'index',
+                    ],
+                ],
+                //common route
+                'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>' => '<module>/<controller>/<action>',
             ],
         ],
         'authManager' => [

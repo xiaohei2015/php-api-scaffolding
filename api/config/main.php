@@ -77,23 +77,21 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
+                    'prefix' => 'api',
                     'controller' => [
+                        'v1/article',
                         'v1/article2',
-                        'v1/center',
-                    ]
+                    ],
+                    'extraPatterns' => [
+                        'POST {id}' => 'update',
+                        'DELETE {id}' => 'delete',
+                        'GET {id}' => 'view',
+                        'POST' => 'create',
+                        'GET' => 'index',
+                    ],
                 ],
-                //路由
-                'GET api/v1/article' => 'v1/article/index',
-                'POST api/v1/article' => 'v1/article/create',
-                'GET api/v1/article/<id:\d+>' => 'v1/article/view',
-                'POST api/v1/article/params-validate' => 'v1/article/params-validate',
-                'POST api/v1/article/add' => 'v1/article/add',
-
-                'POST api/v1/user/login' => 'v1/user/login',
-                'GET api/v1/user/is-login' => 'v1/user/is-login',
-                'POST api/v1/user/logout' => 'v1/user/logout',
-
-                'POST api/v1/func/send-email' => 'v1/func/send-email',
+                //common route
+                'api/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w-]+>' => '<module>/<controller>/<action>',
             ],
         ],
     ],
