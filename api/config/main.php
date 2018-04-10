@@ -43,18 +43,6 @@ return [
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
         ],
-        'session' => [
-            'class' => 'yii\redis\Session',
-            'name' => 'application-api',
-            'timeout' => 0,
-            'keyPrefix' => 'api.session.',
-            'redis' => [
-                'hostname' => 'localhost',
-                'port' => 6379,
-                'database' => 0,
-                'password' => 'pass',
-            ]
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

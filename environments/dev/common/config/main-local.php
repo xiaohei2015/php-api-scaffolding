@@ -28,5 +28,12 @@ return [
                 'from'=>['xiaohei_tech@163.com'=>'小黑科技']
             ],
         ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 1,
+            'password' => 'pass',
+        ],
     ],
 ];

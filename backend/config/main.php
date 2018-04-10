@@ -44,18 +44,6 @@ return [
             'loginUrl' => null,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
-        'session' => [
-            'class' => 'yii\redis\Session',
-            'name' => 'application-backend',
-            'timeout' => 3600,
-            'keyPrefix' => 'backend.session.',
-            'redis' => [
-                'hostname' => 'localhost',
-                'port' => 6379,
-                'database' => 0,
-                'password' => 'pass',
-            ]
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
