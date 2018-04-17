@@ -13,3 +13,8 @@ modules:
     config:
         Yii2:
             configFile: 'config/test-local.php'
+coverage:
+  enabled: true
+  include:
+      - models/*
+      - modelsBiz/*

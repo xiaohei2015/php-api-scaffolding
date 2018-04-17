@@ -3,7 +3,7 @@
 namespace common\tests\unit\models;
 
 use Yii;
-use common\models\LoginForm;
+use common\modelsBiz\LoginForm;
 use common\fixtures\UserFixture;
 
 /**
@@ -22,10 +22,10 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function _fixtures()
     {
         return [
-            'user' => [
+            /*'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'user.php'
-            ]
+            ]*/
         ];
     }
 

@@ -23,6 +23,8 @@ CREATE TABLE `tbl_user` (
   KEY `idx_phone` (`phone`) USING BTREE COMMENT '手机号码索引'
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
+INSERT INTO `tbl_user` (`id`, `account`, `auth_key`, `password`, `name`, `sex`, `avatar`, `phone`, `status`, `create_time`, `update_time`, `last_login`, `is_deleted`, `token`, `token_expired_time`, `allowance`, `allowance_updated_at`) VALUES ('1', '15850243619', '', '$2y$13$mlB2Iqe1GNHFaEvNBxxvBu.OKaQy3FyiSXERPuShzTM1jAS5ZWwbS', 'name123', '2', '123123', '15850243619', '1', '0', '0', '1523946877', '0', '722bd25f87c80de4', '1523947477', '0', '1523946876');
+
 CREATE TABLE `tbl_article` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '文章编号',
 	`title` varchar(64) NOT NULL DEFAULT '' COMMENT '文章标题',
