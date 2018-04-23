@@ -8,7 +8,7 @@ return [
         'session' => [
             'class' => 'yii\redis\Session',
             'name' => 'application-api',
-            'timeout' => 0,
+            'timeout' => 3600,
             'keyPrefix' => 'api.session.',
             'redis' => [
                 'hostname' => 'localhost',
