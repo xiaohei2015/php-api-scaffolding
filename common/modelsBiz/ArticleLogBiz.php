@@ -17,7 +17,16 @@ class ArticleLogBiz extends ArticleLog
      */
     public function rules()
     {
-        return parent::rules();
+        return array_merge(
+            parent::rules(),
+            [
+                'article_id',
+                'exist',
+                'targetClass' => 'common\modelsBiz\ArticleBiz',
+                'targetAttribute' => 'id',
+                'message' => '不存在此用户'
+            ]
+        );
     }
 
     /**

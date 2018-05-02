@@ -113,4 +113,13 @@ class ArticleBiz extends Article
 
         return true;
     }
+
+    public static function findOne($condition)
+    {
+        if($result = parent::findOne($condition)){
+            return $result;
+        }else{
+            ExceptionHandler::throwException('文章不存在');
+        }
+    }
 }

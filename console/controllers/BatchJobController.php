@@ -23,6 +23,7 @@ class BatchJobController extends Controller
     {
         $this->writeLog("开始任务 Test");
         $this->writeLog("结束任务 Test");
+        $q = new \SplQueue();
     }
 
     /**
