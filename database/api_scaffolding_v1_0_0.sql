@@ -98,8 +98,12 @@ INSERT INTO `tbl_admin_user` VALUES ('1');
 INSERT INTO `auth_assignment` VALUES ('管理员', '1', '1532066539');
 
 INSERT INTO `auth_item` VALUES ('/v1/article/*', '2', null, null, null, '1532066500', '1532066500');
+INSERT INTO `auth_item` VALUES ('/v1/user/*', '2', null, null, null, '1532075412', '1532075412');
+INSERT INTO `auth_item` VALUES ('admin', '1', null, null, null, '1532066529', '1532066529');
 INSERT INTO `auth_item` VALUES ('文章管理', '2', null, null, null, '1532066512', '1532066512');
-INSERT INTO `auth_item` VALUES ('管理员', '1', null, null, null, '1532066529', '1532066529');
+INSERT INTO `auth_item` VALUES ('用户登录', '2', null, null, null, '1532075431', '1532075431');
 
+INSERT INTO `auth_item_child` VALUES ('admin', '文章管理');
+INSERT INTO `auth_item_child` VALUES ('admin', '用户登录');
 INSERT INTO `auth_item_child` VALUES ('文章管理', '/v1/article/*');
-INSERT INTO `auth_item_child` VALUES ('管理员', '文章管理');
+INSERT INTO `auth_item_child` VALUES ('用户登录', '/v1/user/*');
