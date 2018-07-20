@@ -66,7 +66,7 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'prefix' => 'api',
+                    'prefix' => 'admin',
                     'controller' => [
                         'v1/article',
                     ],

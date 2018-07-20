@@ -10,7 +10,7 @@ use yii\data\ActiveDataProvider;
 /**
  * Menu controller for the `v1` module
  */
-class JdController extends ActiveController
+class ArticleController extends ActiveController
 {
     public $modelClass = 'common\modelsBiz\ArticleBiz';
     public $serializer = [
