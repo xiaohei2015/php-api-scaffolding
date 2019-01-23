@@ -27,4 +27,16 @@ class ReturnMsg extends Model
     {
         return $msg;
     }
+
+    public static function withCodeMsg($identify, $data)
+    {
+        if(isset(Yii::$app->params['response.code'][$identify])){
+            return [
+                'code' => Yii::$app->params['response.code'][$identify]['id'],
+                'msg' => Yii::$app->params['response.code'][$identify]['label'],
+                'data' => $data,
+            ];
+        }
+        return $data;
+    }
 }

@@ -12,9 +12,15 @@ use yii\helpers\ArrayHelper;
 class Error extends Component
 {
     private $error = [];
-    private $code = 1;
+    private $code = 0;
 
-    public function add($err, $code = 1)
+    public function init()
+    {
+        parent::init();
+        $this->setCode(Yii::$app->params['response.code']['system_error']['id']);
+    }
+
+    public function add($err, $code = 0)
     {
         if(is_array($err) || is_object($err)){
             foreach ($err as $k=>$v){
