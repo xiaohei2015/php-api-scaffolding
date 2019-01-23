@@ -154,6 +154,10 @@ class Serializer extends Component
             return ['code'=>$param['id'],'msg'=>$param['label'],'data'=>$this->serializeDataProvider($data)];
         }
 
+        if(isset($data['code'])&&isset($data['msg'])){
+            return isset($data['data'])?['code'=>$data['code'],'msg'=>$data['msg'],'data'=>$data['data']]:['code'=>$data['code'],'msg'=>$data['msg']];
+        }
+
         return $data?['code'=>$param['id'],'msg'=>$param['label'],'data'=>$data]:['code'=>$param['id'],'msg'=>$param['label']];
     }
 

@@ -20,8 +20,11 @@ return [
         'system_busy'               => ['id'=>1001,     'name'=>'SYSTEM_BUSY',          'label'=>'服务器繁忙，请稍候再试'],
 
         /*用户态*/
-        'user_not_login'            => ['id'=>2000,     'name'=>'USER_NOT_LOGIN',       'label'=>'用户未登录'],
+        'user_not_login'            => ['id'=>2000,     'name'=>'USER_NOT_LOGIN',       'label'=>'身份异常请重新登录'],
         'user_frozen'               => ['id'=>2001,     'name'=>'USER_FROZEN',          'label'=>'账户被冻结'],
+
+        /*系统错误*/
+        'system_error'              => ['id'=>5000,     'name'=>'SYSTEM_ERROR',         'label'=>'系统出错'],
     ],
     'cache.prefix' => 'cache.',
     'queue.prefix' => 'queue.',

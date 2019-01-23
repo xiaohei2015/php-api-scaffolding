@@ -91,7 +91,8 @@ abstract class AuthMethod extends ActionFilter implements \yii\filters\auth\Auth
     {
         header('Content-type: application/json');
         header("Cache-Control: no-cache, must-revalidate");
-        $json =  json_encode(['code'=>'5112','msg'=>'身份异常请重新登录']);
+        $json =  json_encode(['code'=>Yii::$app->params['response.code']['user_not_login']['id'],
+            'msg'=>Yii::$app->params['response.code']['user_not_login']['label']]);
         echo $json;
         Yii::$app->end();
     }
