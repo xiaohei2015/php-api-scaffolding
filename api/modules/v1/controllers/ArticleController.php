@@ -34,7 +34,6 @@ class ArticleController extends ActiveController
                     'modelClass' => $this->modelClass,
                     'checkAccess' => [$this, 'checkAccess'],
                     'execute' => function ($action, $model) {
-                        $model->save();
                         return $model;
                     }
                 ],

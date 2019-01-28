@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Article;
-use common\components\exception\ExceptionHandler;
+use common\components\exception\InvalidLogicException;
 
 /**
  * ArticleBiz represents the model behind the search form of `common\models\Article`.
@@ -94,7 +94,7 @@ class ArticleBiz extends Article
             $model = new ArticleBiz();
             $model->load($params,'');
             if(!$model->save()){
-                ExceptionHandler::throwException($model);
+                throw new InvalidLogicException($model, '文章保存失败！');
             }
 
             $model_log = new ArticleLogBiz();
@@ -102,13 +102,13 @@ class ArticleBiz extends Article
             $model_log->title = $model->title.$model->title;
             $model_log->content = $model->content;
             if(!$model_log->save()){
-                ExceptionHandler::throwException($model_log);
+                throw new InvalidLogicException($model_log, '文章日志保存失败！');
             }
 
             $transaction->commit();
         } catch (\Exception $e) {
             $transaction->rollBack();
-            throw new \Exception($e->getMessage());
+            throw $e;
         }
 
         return true;
@@ -119,7 +119,7 @@ class ArticleBiz extends Article
         if($result = parent::findOne($condition)){
             return $result;
         }else{
-            ExceptionHandler::throwException('文章不存在');
+            throw new InvalidLogicException([], '文章不存在！');
         }
     }
 }
